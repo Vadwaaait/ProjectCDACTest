@@ -16,7 +16,7 @@ public interface UserService {
 	List<UserEntity> getAllUsers();
 
 	
-	String makeBook(UserDTO userDto);
+	String makeBook(UserDTO userDto, HotelDto hotelDto);
 	
 	
 	

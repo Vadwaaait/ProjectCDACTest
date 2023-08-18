@@ -70,15 +70,26 @@ public class UserServiceImpl implements UserService{
 
 
 	@Override
-	public String makeBook(UserDTO userDto) {
-		
+	public String makeBook(UserDTO userDto, HotelDto hotelDto) {
+		UserEntity uInfo;
+		HotelEntity hInfo=null;
 		List<UserEntity> ue= userRepo.findAll();
+		List<HotelEntity> he = hotelRepo.findAll();
+		
+		for(HotelEntity e : he)
+		{
+			if(e.getHotelId()==userDto.getHotelid())
+			{
+				hInfo=e;
+			}
+		}
+		
 		
 		for(UserEntity e  : ue)
 		{
 			if(e.getUserId()==userDto.getUserId())
 			{
-				BookingEntity be = new BookingEntity(e);
+				BookingEntity be = new BookingEntity(e,hInfo);
 				bookingRepo.save(be);
 				return "Booked";
 			}

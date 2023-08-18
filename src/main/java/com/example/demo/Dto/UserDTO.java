@@ -11,6 +11,7 @@ public class UserDTO {
 	private String userEmail;
 	private String userPassword;
 	
+	private int hotelid;
 	
 	
 	
@@ -52,6 +53,18 @@ public class UserDTO {
 	}
 	public void setUserPassword(String userPassword) {
 		this.userPassword = userPassword;
+	}
+
+
+
+	public int getHotelid() {
+		return hotelid;
+	}
+
+
+
+	public void setHotelid(int hotelid) {
+		this.hotelid = hotelid;
 	}
 
 

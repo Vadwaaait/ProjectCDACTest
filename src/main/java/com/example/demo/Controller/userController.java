@@ -47,11 +47,11 @@ public class userController {
 	
 	
 	@PostMapping("/makeBooking")
-	public String makeBook(@RequestBody UserDTO userDTO)
+	public String makeBook(@RequestBody UserDTO userDTO, HotelDto hotelDto)
 	{
-		userService.makeBook(userDTO);
+		userService.makeBook(userDTO,hotelDto);
 		
-		return 1 +  " : User Booking is Done as of now";
+		return  " : User Booking is Done as of now";
 		
 	}
 	
