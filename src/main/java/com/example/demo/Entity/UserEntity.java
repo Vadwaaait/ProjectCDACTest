@@ -6,9 +6,10 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 
 @Entity
-@Table(name="testUser")
+@Table(name="testUser",uniqueConstraints={@UniqueConstraint(columnNames={"userEmail"})})
 public class UserEntity {
 	
 	@Id
@@ -19,7 +20,7 @@ public class UserEntity {
 	@Column(name="uname")
 	private String userName;
 	
-	@Column(name="userEmail")
+	@Column(name="userEmail",unique=true)
 	private String userEmail;
 	
 	@Column(name="userPass")

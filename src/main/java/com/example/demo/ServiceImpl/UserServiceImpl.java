@@ -47,10 +47,12 @@ public class UserServiceImpl implements UserService{
 				);
 		
 		userRepo.save(userEntity);
-		
-		
-		
 		return "User Added :  "+ userEntity.getUserName() ;
+		
+		
+		
+		
+		
 	}
 
 
