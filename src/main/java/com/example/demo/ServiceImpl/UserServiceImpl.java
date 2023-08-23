@@ -1,8 +1,9 @@
 package com.example.demo.ServiceImpl;
 
+
 import java.util.List;
 import java.util.Optional;
-
+import java.sql.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -65,6 +66,8 @@ public class UserServiceImpl implements UserService{
 	
 		
 		return userRepo.findAll();
+		
+		
 	}
 
 
@@ -74,6 +77,8 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public String makeBook(UserDTO userDto, HotelDto hotelDto) {
 		UserEntity uInfo;
+		Date fromDate=(Date) userDto.getFromDate();
+		Date toDate=(Date)userDto.getToDate();
 		HotelEntity hInfo=null;
 		List<UserEntity> ue= userRepo.findAll();
 		List<HotelEntity> he = hotelRepo.findAll();
@@ -83,15 +88,17 @@ public class UserServiceImpl implements UserService{
 			if(e.getHotelId()==userDto.getHotelid())
 			{
 				hInfo=e;
+			
 			}
 		}
 		
 		
 		for(UserEntity e  : ue)
 		{
+			
 			if(e.getUserId()==userDto.getUserId())
 			{
-				BookingEntity be = new BookingEntity(e,hInfo);
+				BookingEntity be = new BookingEntity(e,hInfo,fromDate,toDate);
 				bookingRepo.save(be);
 				return "Booked";
 			}
@@ -105,6 +112,24 @@ public class UserServiceImpl implements UserService{
 		
 		return "Not Booked";
 		
+	}
+
+
+
+
+
+	@Override
+	public HotelEntity searchHotel(String name) {
+		
+	 List<HotelEntity> lhe=	hotelRepo.findAll();
+		
+	 	for(HotelEntity he : lhe)
+	 	{
+	 		if(he.getHotelName().equals(name))
+	 			return he;
+	 	}
+	 
+		return null;
 	}
 
 

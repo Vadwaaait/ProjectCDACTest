@@ -1,5 +1,7 @@
 package com.example.demo.Entity;
 
+
+import java.sql.Date;
 import java.util.List;
 
 import org.apache.catalina.User;
@@ -27,19 +29,46 @@ public class BookingEntity {
 	@ManyToOne
 	private HotelEntity hotelE;
 
-
 	
+	private Date fromDate;
+	
+	private Date toDate;
 
 
-	public BookingEntity(UserEntity userE, HotelEntity hotelE) {
+	public BookingEntity(UserEntity userE, HotelEntity hotelE, Date fromDate, Date toDate) {
 		super();
 		this.userE = userE;
 		this.hotelE = hotelE;
+		this.fromDate = fromDate;
+		this.toDate=toDate;
 	}
 
 
 	public BookingEntity() {
 		super();
+	}
+
+	
+	
+	
+
+	public Date getFromDate() {
+		return fromDate;
+	}
+
+
+	public void setFromDate(Date fromDate) {
+		this.fromDate = fromDate;
+	}
+
+
+	public Date getToDate() {
+		return toDate;
+	}
+
+
+	public void setToDate(Date toDate) {
+		this.toDate = toDate;
 	}
 
 
@@ -75,7 +104,8 @@ public class BookingEntity {
 
 	@Override
 	public String toString() {
-		return "BookingEntity [bookingId=" + bookingId + ", userE=" + userE + ", hotelE=" + hotelE + "]";
+		return "BookingEntity [bookingId=" + bookingId + ", userE=" + userE + ", hotelE=" + hotelE + ", fromDate="
+				+ fromDate + ", toDate=" + toDate + "]";
 	}
 
 

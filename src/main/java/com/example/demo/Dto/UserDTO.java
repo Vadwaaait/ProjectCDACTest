@@ -1,5 +1,9 @@
 	package com.example.demo.Dto;
 
+
+
+import java.sql.Date;
+
 import jakarta.persistence.OneToMany;
 
 public class UserDTO {
@@ -13,7 +17,9 @@ public class UserDTO {
 	
 	private int hotelid;
 	
+	private Date fromDate;
 	
+	private Date toDate;
 	
 	
 	
@@ -56,6 +62,31 @@ public class UserDTO {
 	}
 
 
+	
+
+	public Date getFromDate() {
+		return fromDate;
+	}
+
+
+
+	public void setFromDate(Date fromDate) {
+		this.fromDate = fromDate;
+	}
+
+
+
+	public Date getToDate() {
+		return toDate;
+	}
+
+
+
+	public void setToDate(Date toDate) {
+		this.toDate = toDate;
+	}
+
+
 
 	public int getHotelid() {
 		return hotelid;
@@ -72,7 +103,7 @@ public class UserDTO {
 	@Override
 	public String toString() {
 		return "UserDTO [userId=" + userId + ", userName=" + userName + ", userEmail=" + userEmail + ", userPassword="
-				+ userPassword + "]";
+				+ userPassword + ", hotelid=" + hotelid + ", fromDate=" + fromDate + ", toDate=" + toDate + "]";
 	}
 	
 	

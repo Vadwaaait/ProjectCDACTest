@@ -19,5 +19,7 @@ public interface UserService {
 	String makeBook(UserDTO userDto, HotelDto hotelDto);
 	
 	
+	HotelEntity searchHotel(String name);
+	
 	
 }

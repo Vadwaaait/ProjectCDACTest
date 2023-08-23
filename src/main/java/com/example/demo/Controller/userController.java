@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -63,6 +64,16 @@ public class userController {
 		userService.makeBook(userDTO,hotelDto);
 		
 		return  " : User Booking is Done as of now";
+		
+	}
+	
+	@GetMapping("/hotel/{hotelname}")
+	public HotelEntity searchHotel(@PathVariable("hotelname") String hotelName)
+	{
+		
+		
+		
+		return userService.searchHotel(hotelName);
 		
 	}
 	
