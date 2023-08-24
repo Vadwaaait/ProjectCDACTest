@@ -17,10 +17,15 @@ public class UserDTO {
 	
 	private int hotelid;
 	
+	
+	//extras
 	private Date fromDate;
 	
 	private Date toDate;
 	
+	private int noOfDays;
+	
+	private double amountPaid;
 	
 	
 	public UserDTO() {
@@ -29,6 +34,40 @@ public class UserDTO {
 	
 	
 	
+	
+	
+	public int getNoOfDays() {
+		return noOfDays;
+	}
+
+
+
+
+
+	public void setNoOfDays(int noOfDays) {
+		this.noOfDays = noOfDays;
+	}
+
+
+
+
+
+	public double getAmountPaid() {
+		return amountPaid;
+	}
+
+
+
+
+
+	public void setAmountPaid(double amountPaid) {
+		this.amountPaid = amountPaid;
+	}
+
+
+
+
+
 	public UserDTO(int userId, String userName, String userEmail, String userPassword) {
 		
 		this.userId = userId;

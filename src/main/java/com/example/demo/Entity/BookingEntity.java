@@ -33,14 +33,20 @@ public class BookingEntity {
 	private Date fromDate;
 	
 	private Date toDate;
+	
+	private int noOfDays;
+	
+	private double amountPaid;
 
 
-	public BookingEntity(UserEntity userE, HotelEntity hotelE, Date fromDate, Date toDate) {
+	public BookingEntity(UserEntity userE, HotelEntity hotelE, Date fromDate, Date toDate,int noOfDays,double amountPaid) {
 		super();
 		this.userE = userE;
 		this.hotelE = hotelE;
 		this.fromDate = fromDate;
 		this.toDate=toDate;
+		this.noOfDays=noOfDays;
+		this.amountPaid=amountPaid;
 	}
 
 

@@ -82,6 +82,8 @@ public class UserServiceImpl implements UserService{
 		UserEntity uInfo;
 		Date fromDate=(Date) userDto.getFromDate();
 		Date toDate=(Date)userDto.getToDate();
+		int noOfDays=userDto.getNoOfDays();
+		double amountPaid=userDto.getAmountPaid();
 		HotelEntity hInfo=null;
 		List<UserEntity> ue= userRepo.findAll();
 		List<HotelEntity> he = hotelRepo.findAll();
@@ -101,7 +103,7 @@ public class UserServiceImpl implements UserService{
 			
 			if(e.getUserId()==userDto.getUserId())
 			{
-				BookingEntity be = new BookingEntity(e,hInfo,fromDate,toDate);
+				BookingEntity be = new BookingEntity(e,hInfo,fromDate,toDate,noOfDays,amountPaid);
 				bookingRepo.save(be);
 				return "Booked";
 			}
