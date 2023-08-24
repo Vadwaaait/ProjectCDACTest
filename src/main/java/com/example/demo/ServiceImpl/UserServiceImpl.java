@@ -1,6 +1,7 @@
 package com.example.demo.ServiceImpl;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.sql.Date;
@@ -153,6 +154,30 @@ public class UserServiceImpl implements UserService{
 		}
 		
 		return null;
+	}
+
+
+
+
+
+	@Override
+	public List<BookingEntity> getMyBookings(int userId) {
+		
+		List<BookingEntity> lbe=bookingRepo.findAll();
+		
+		
+		List<BookingEntity> bookingList=new ArrayList<>();
+		
+		
+		for(BookingEntity be : lbe)
+		{
+			if(be.getUserE().getUserId()==userId)
+			{
+				bookingList.add(be);
+			}
+		}
+		
+		return bookingList;
 	}
 
 

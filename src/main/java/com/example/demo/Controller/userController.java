@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.Dto.HotelDto;
 import com.example.demo.Dto.UserDTO;
+import com.example.demo.Entity.BookingEntity;
 import com.example.demo.Entity.HotelEntity;
 import com.example.demo.Entity.UserEntity;
 import com.example.demo.Service.UserService;
@@ -82,6 +83,15 @@ public class userController {
 	{
 		
 		return userService.getHotelById(hotelid);
+	}
+	
+	@GetMapping("/bookings/{userId}")
+	public List<BookingEntity> getMyBookings(@PathVariable("userId") int userId)
+	{
+		
+		
+		
+		return userService.getMyBookings(userId);
 	}
 	
 
