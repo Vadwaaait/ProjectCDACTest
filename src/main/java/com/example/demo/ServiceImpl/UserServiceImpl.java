@@ -139,6 +139,24 @@ public class UserServiceImpl implements UserService{
 
 
 
+	@Override
+	public HotelEntity getHotelById(int id) {
+		
+		List<HotelEntity> lhe= hotelRepo.findAll();
+		
+		for(HotelEntity he:lhe)
+		{
+			if(he.getHotelId()==id)
+				return he;
+		}
+		
+		return null;
+	}
+
+
+
+
+
 
 
 

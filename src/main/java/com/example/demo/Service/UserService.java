@@ -21,5 +21,5 @@ public interface UserService {
 	
 	HotelEntity searchHotel(String name);
 	
-	
+	HotelEntity getHotelById(int id);
 }

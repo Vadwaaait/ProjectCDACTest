@@ -77,5 +77,12 @@ public class userController {
 		
 	}
 	
+	@GetMapping("/hotel/id/{hotelid}")
+	public HotelEntity getHotelById(@PathVariable("hotelid") int hotelid)
+	{
+		
+		return userService.getHotelById(hotelid);
+	}
+	
 
 }
