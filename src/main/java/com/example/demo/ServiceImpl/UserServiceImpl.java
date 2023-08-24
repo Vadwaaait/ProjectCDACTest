@@ -25,8 +25,11 @@ public class UserServiceImpl implements UserService{
 	@Autowired
 	private UserRepo userRepo;
 	
+	
+	
 	@Autowired
 	private HotelRepo hotelRepo;
+	
 	
 	
 	@Autowired
