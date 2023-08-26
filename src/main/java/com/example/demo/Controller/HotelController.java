@@ -15,7 +15,7 @@ import com.example.demo.Entity.HotelEntity;
 import com.example.demo.Service.HotelService;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins ="*")
 @RequestMapping("/api")
 public class HotelController {
 

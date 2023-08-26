@@ -41,7 +41,9 @@ public class SecurityConfig {
 
 		   
 	        http
+	        .cors().and()
 	        .csrf().disable()
+	     
 	            .authorizeHttpRequests((authz) -> authz
 	                .anyRequest()
 	                .authenticated()
