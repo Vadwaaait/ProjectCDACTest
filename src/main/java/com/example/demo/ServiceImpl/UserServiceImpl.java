@@ -184,6 +184,54 @@ public class UserServiceImpl implements UserService{
 
 
 
+	@Override
+	public UserEntity login(UserDTO userDto) {
+		
+		
+		List<UserEntity> lue = userRepo.findAll();
+		
+		for(UserEntity ue  : lue)
+		{
+			if(userDto.getUserEmail().equals(ue.getUserEmail()) && userDto.getUserPassword().equals(ue.getUserPassword()))
+			{
+				return ue;
+			}
+		}
+		
+		return null;
+	}
+
+
+
+
+
+	@Override
+	public List<HotelEntity> getHotelsByCity(String hotelCity) {
+		
+			List<HotelEntity> lhe=hotelRepo.findAll();
+			
+			List<HotelEntity> myCityHotels = new ArrayList<>(); 
+		
+			for(HotelEntity he : lhe)
+			{
+				
+				if(he.getHotelCity().equals(hotelCity))
+				{
+					myCityHotels.add(he);
+				}
+				
+			}
+			
+			
+			
+			
+		return myCityHotels;
+	}
+
+
+
+
+
 
 
 

@@ -22,7 +22,7 @@ import com.example.demo.Entity.UserEntity;
 import com.example.demo.Service.UserService;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(originPatterns = "*")
 @RequestMapping("api/user")
 public class userController {
 	
@@ -92,6 +92,27 @@ public class userController {
 		
 		
 		return userService.getMyBookings(userId);
+	}
+	
+	
+	
+	@PostMapping("/login")
+	public UserEntity Login(@RequestBody UserDTO userDto)
+	{
+		
+		
+		
+		return userService.login(userDto);
+	}
+	
+	
+	@GetMapping("/cityHotels/{hotelCity}")
+	public List<HotelEntity> getHotelsByCity(@PathVariable String hotelCity)
+	{
+		
+		
+		
+		return userService.getHotelsByCity(hotelCity);
 	}
 	
 

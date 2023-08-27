@@ -11,6 +11,8 @@ import com.example.demo.Entity.UserEntity;
 public interface UserService {
 
 	
+	UserEntity login(UserDTO userDto);
+	
 	String addUser(UserDTO userDto);
 	
 	
@@ -26,4 +28,7 @@ public interface UserService {
 	
 	
 	List<BookingEntity> getMyBookings(int userId);
+	
+	List<HotelEntity> getHotelsByCity(String hotelCity);
+	
 }

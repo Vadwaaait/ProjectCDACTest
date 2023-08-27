@@ -45,10 +45,12 @@ public class SecurityConfig {
 	        .csrf().disable()
 	     
 	            .authorizeHttpRequests((authz) -> authz
+	            	.requestMatchers("/authentication/**").permitAll()
 	                .anyRequest()
 	                .authenticated()
 	               
 	            )
+	      
 	            .httpBasic();
 	        return http.build();
 	    }

@@ -12,7 +12,7 @@ import com.example.demo.Dto.UserDTO;
 import com.example.demo.Service.AdminService;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(originPatterns = "*")
 @RequestMapping("/api/admin")
 public class AdminController {
 	
