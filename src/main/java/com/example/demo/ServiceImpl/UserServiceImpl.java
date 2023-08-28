@@ -1,9 +1,12 @@
 package com.example.demo.ServiceImpl;
 
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
+import java.sql.Date;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -24,8 +27,11 @@ public class UserServiceImpl implements UserService{
 	@Autowired
 	private UserRepo userRepo;
 	
+	
+	
 	@Autowired
 	private HotelRepo hotelRepo;
+	
 	
 	
 	@Autowired
@@ -65,6 +71,8 @@ public class UserServiceImpl implements UserService{
 	
 		
 		return userRepo.findAll();
+		
+		
 	}
 
 
@@ -74,6 +82,11 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public String makeBook(UserDTO userDto, HotelDto hotelDto) {
 		UserEntity uInfo;
+		Date fromDate=(Date) userDto.getFromDate();
+		Date toDate=(Date)userDto.getToDate();
+		int noOfDays=userDto.getNoOfDays();
+		double amountPaid=userDto.getAmountPaid();
+		int noroomsbooked= userDto.getNoroomsbooked();
 		HotelEntity hInfo=null;
 		List<UserEntity> ue= userRepo.findAll();
 		List<HotelEntity> he = hotelRepo.findAll();
@@ -83,15 +96,17 @@ public class UserServiceImpl implements UserService{
 			if(e.getHotelId()==userDto.getHotelid())
 			{
 				hInfo=e;
+			
 			}
 		}
 		
 		
 		for(UserEntity e  : ue)
 		{
+			
 			if(e.getUserId()==userDto.getUserId())
 			{
-				BookingEntity be = new BookingEntity(e,hInfo);
+				BookingEntity be = new BookingEntity(e,hInfo,fromDate,toDate,noOfDays,amountPaid,noroomsbooked);
 				bookingRepo.save(be);
 				return "Booked";
 			}
@@ -105,6 +120,117 @@ public class UserServiceImpl implements UserService{
 		
 		return "Not Booked";
 		
+	}
+
+
+
+
+
+	@Override
+	public HotelEntity searchHotel(String name) {
+		
+	 List<HotelEntity> lhe=	hotelRepo.findAll();
+		
+	 	for(HotelEntity he : lhe)
+	 	{
+	 		if(he.getHotelName().equals(name))
+	 			return he;
+	 	}
+	 
+		return null;
+	}
+
+
+
+
+
+	@Override
+	public HotelEntity getHotelById(int id) {
+		
+		List<HotelEntity> lhe= hotelRepo.findAll();
+		
+		for(HotelEntity he:lhe)
+		{
+			if(he.getHotelId()==id)
+				return he;
+		}
+		
+		return null;
+	}
+
+
+
+
+
+	@Override
+	public List<BookingEntity> getMyBookings(int userId) {
+		
+		List<BookingEntity> lbe=bookingRepo.findAll();
+		
+		
+		//order by bookingID descending
+		List<BookingEntity> dlbe=bookingRepo.findAll(Sort.by("bookingId").descending());
+		
+		List<BookingEntity> bookingList=new ArrayList<>();
+		
+		
+		for(BookingEntity be : dlbe)
+		{
+			if(be.getUserE().getUserId()==userId)
+			{
+				bookingList.add(be);
+			}
+		}
+		
+		return bookingList;
+	}
+
+
+
+
+
+	@Override
+	public UserEntity login(UserDTO userDto) {
+		
+		
+		List<UserEntity> lue = userRepo.findAll();
+		
+		for(UserEntity ue  : lue)
+		{
+			if(userDto.getUserEmail().equals(ue.getUserEmail()) && userDto.getUserPassword().equals(ue.getUserPassword()))
+			{
+				return ue;
+			}
+		}
+		
+		return null;
+	}
+
+
+
+
+
+	@Override
+	public List<HotelEntity> getHotelsByCity(String hotelCity) {
+		
+			List<HotelEntity> lhe=hotelRepo.findAll();
+			
+			List<HotelEntity> myCityHotels = new ArrayList<>(); 
+		
+			for(HotelEntity he : lhe)
+			{
+				
+				if(he.getHotelCity().equals(hotelCity))
+				{
+					myCityHotels.add(he);
+				}
+				
+			}
+			
+			
+			
+			
+		return myCityHotels;
 	}
 
 
