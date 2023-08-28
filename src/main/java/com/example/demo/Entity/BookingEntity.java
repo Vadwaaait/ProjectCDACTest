@@ -36,10 +36,43 @@ public class BookingEntity {
 	
 	private int noOfDays;
 	
+	
+	public int getNoOfDays() {
+		return noOfDays;
+	}
+
+
+	public void setNoOfDays(int noOfDays) {
+		this.noOfDays = noOfDays;
+	}
+
+
+	private int noroomsbooked;
+	
+	public int getNoroomsbooked() {
+		return noroomsbooked;
+	}
+
+
+	public void setNoroomsbooked(int noroomsbooked) {
+		this.noroomsbooked = noroomsbooked;
+	}
+
+
 	private double amountPaid;
 
 
-	public BookingEntity(UserEntity userE, HotelEntity hotelE, Date fromDate, Date toDate,int noOfDays,double amountPaid) {
+	public double getAmountPaid() {
+		return amountPaid;
+	}
+
+
+	public void setAmountPaid(double amountPaid) {
+		this.amountPaid = amountPaid;
+	}
+
+
+	public BookingEntity(UserEntity userE, HotelEntity hotelE, Date fromDate, Date toDate,int noOfDays,double amountPaid,int noroomsbooked) {
 		super();
 		this.userE = userE;
 		this.hotelE = hotelE;
@@ -47,6 +80,7 @@ public class BookingEntity {
 		this.toDate=toDate;
 		this.noOfDays=noOfDays;
 		this.amountPaid=amountPaid;
+		this.noroomsbooked=noroomsbooked;
 	}
 
 

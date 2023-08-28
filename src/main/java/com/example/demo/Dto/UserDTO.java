@@ -27,7 +27,31 @@ public class UserDTO {
 	
 	private double amountPaid;
 	
+	private int noroomsbooked;
 	
+	
+	
+
+
+
+
+
+	public int getNoroomsbooked() {
+		return noroomsbooked;
+	}
+
+
+
+
+
+	public void setNoroomsbooked(int noroomsbooked) {
+		this.noroomsbooked = noroomsbooked;
+	}
+
+
+
+
+
 	public UserDTO() {
 	
 	}

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 import java.sql.Date;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -85,6 +86,7 @@ public class UserServiceImpl implements UserService{
 		Date toDate=(Date)userDto.getToDate();
 		int noOfDays=userDto.getNoOfDays();
 		double amountPaid=userDto.getAmountPaid();
+		int noroomsbooked= userDto.getNoroomsbooked();
 		HotelEntity hInfo=null;
 		List<UserEntity> ue= userRepo.findAll();
 		List<HotelEntity> he = hotelRepo.findAll();
@@ -104,7 +106,7 @@ public class UserServiceImpl implements UserService{
 			
 			if(e.getUserId()==userDto.getUserId())
 			{
-				BookingEntity be = new BookingEntity(e,hInfo,fromDate,toDate,noOfDays,amountPaid);
+				BookingEntity be = new BookingEntity(e,hInfo,fromDate,toDate,noOfDays,amountPaid,noroomsbooked);
 				bookingRepo.save(be);
 				return "Booked";
 			}
@@ -166,10 +168,13 @@ public class UserServiceImpl implements UserService{
 		List<BookingEntity> lbe=bookingRepo.findAll();
 		
 		
+		//order by bookingID descending
+		List<BookingEntity> dlbe=bookingRepo.findAll(Sort.by("bookingId").descending());
+		
 		List<BookingEntity> bookingList=new ArrayList<>();
 		
 		
-		for(BookingEntity be : lbe)
+		for(BookingEntity be : dlbe)
 		{
 			if(be.getUserE().getUserId()==userId)
 			{
