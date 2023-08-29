@@ -16,6 +16,7 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+import static org.springframework.security.config.Customizer.withDefaults;
 
 
 @Configuration
@@ -36,22 +37,23 @@ public class SecurityConfig {
 	
 	   @Bean
 	    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		   
-		
 
-		   
-	        http
-	        .cors().and()
-	        .csrf().disable()
-	     
-	            .authorizeHttpRequests((authz) -> authz
-	            	.requestMatchers("/authentication/**").permitAll()
-	                .anyRequest()
-	                .authenticated()
-	               
-	            )
-	      
-	            .httpBasic();
+
+           http
+                   .cors()
+                   .and()
+                   .csrf().disable()
+
+                   .authorizeHttpRequests((authz) -> authz
+                                   .requestMatchers("/api/user/save")
+                                   .permitAll()
+
+                                   .anyRequest()
+                                   .authenticated()
+
+                   )
+
+                   .httpBasic(withDefaults());
 	        return http.build();
 	    }
 	   

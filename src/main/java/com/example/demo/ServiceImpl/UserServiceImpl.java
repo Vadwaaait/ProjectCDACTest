@@ -45,7 +45,7 @@ public class UserServiceImpl implements UserService{
 		
 		
 		UserEntity userEntity = new UserEntity(
-			
+				userDto.getRoles(),
 				userDto.getUserName(),
 				userDto.getUserEmail(),
 				userDto.getUserPassword()

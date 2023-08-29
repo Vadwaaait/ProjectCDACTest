@@ -6,9 +6,12 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.hibernate.annotations.Cascade;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import com.example.demo.Entity.Role;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -42,25 +45,56 @@ public class UserEntity implements UserDetails{
 	private String userPassword;
 	
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinTable(name="user_role", joinColumns = @JoinColumn(name="user",referencedColumnName = "userId"),
-	inverseJoinColumns = @JoinColumn(name="role",referencedColumnName = "id"))
-	private Set<Role> roles= new HashSet<>();
+	private Set<Role> roles;
+	
 	
 	
 	
 	
 
-	public UserEntity() {
-		
-	}
-
-	public UserEntity(String userName, String userEmail, String userPassword) {
 	
-		
+
+	public UserEntity(Set<Role> roles, String userName, String userEmail, String userPassword) {
+		super();
+		this.roles = roles;
 		this.userName = userName;
 		this.userEmail = userEmail;
 		this.userPassword = userPassword;
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+	public UserEntity() {
+		
+	}
+	
+	
+	
+	
+
+
+
+
+
+
+
+
+//	public UserEntity(String userName, String userEmail, String userPassword) {
+//	
+//		
+//		this.userName = userName;
+//		this.userEmail = userEmail;
+//		this.userPassword = userPassword;
+//	}
 
 	public int getUserId() {
 		return userId;
