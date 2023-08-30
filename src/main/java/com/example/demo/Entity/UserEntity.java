@@ -1,5 +1,6 @@
 package com.example.demo.Entity;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -44,33 +45,17 @@ public class UserEntity implements UserDetails{
 	@Column(name="userPass")
 	private String userPassword;
 	
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private Set<Role> roles;
+	@ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	private Collection<Role> roles=new HashSet<Role>();
 	
 	
-	
-	
-	
-
-	
-
-	public UserEntity(Set<Role> roles, String userName, String userEmail, String userPassword) {
+	public UserEntity(String userName, String userEmail, String userPassword) {
 		super();
-		this.roles = roles;
 		this.userName = userName;
 		this.userEmail = userEmail;
 		this.userPassword = userPassword;
+		
 	}
-
-
-
-
-
-
-
-
-
-
 
 
 	public UserEntity() {
@@ -96,9 +81,33 @@ public class UserEntity implements UserDetails{
 //		this.userPassword = userPassword;
 //	}
 
+	
+
+
+
+
+
+
+
+
+
+
+
+
 	public int getUserId() {
 		return userId;
 	}
+
+	public Collection<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Collection<Role> roles) {
+		this.roles = roles;
+	}
+
+
+
 
 	public void setUserId(int userId) {
 		this.userId = userId;
@@ -131,7 +140,7 @@ public class UserEntity implements UserDetails{
 	@Override
 	public String toString() {
 		return "UserEntity [userId=" + userId + ", userName=" + userName + ", userEmail=" + userEmail
-				+ ", userPassword=" + userPassword + "]";
+				+ ", userPassword=" + userPassword + ", roles=" + roles.toString() + "]";
 	}
 
 	@Override

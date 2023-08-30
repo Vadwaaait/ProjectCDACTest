@@ -39,23 +39,55 @@ public class SecurityConfig {
 	    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
 
-           http
-                   .cors()
-                   .and()
-                   .csrf().disable()
+		   http
+           .cors()
+           .and()
+           .csrf().disable() 
+           .authorizeHttpRequests((authz) -> authz
+                           .requestMatchers("/api/user/getUsers").hasAnyAuthority("USER")
+                           .requestMatchers("api/user/**").hasAnyAuthority("USER")
+                           .requestMatchers("/payment").hasAnyAuthority("USER","ADMIN")
+                           .anyRequest()
+                           .authenticated()
+                           
+           )
 
-                   .authorizeHttpRequests((authz) -> authz
-                                   .requestMatchers("/api/user/save")
-                                   .permitAll()
+           .httpBasic(withDefaults());
+    return http.build();
 
-                                   .anyRequest()
-                                   .authenticated()
+    
+//  http
+//  .cors()
+//  .and()
+//  .csrf().disable() 
+//  .authorizeHttpRequests((authz) -> authz
+//                  .requestMatchers("")
+//                  .permitAll()
+//                  .anyRequest()
+//                  .authenticated()
+//                  
+//  )
+//
+//  .httpBasic(withDefaults());
+//return http.build();
 
-                   )
-
-                   .httpBasic(withDefaults());
-	        return http.build();
+//------------------------------------------------------------- 
+		   
 	    }
+	   
+	   
+	   
+	   
+	 
+	   
+	   
+	   //Ignoring certain end points doesnt need basic auth
+	   @Bean
+	    public WebSecurityCustomizer webSecurityCustomizer() {
+		   
+	        return (web) -> web.ignoring().requestMatchers("/api/user/save","/api/admin/save");
+	    
+	   }
 	   
 	   
 	   
@@ -70,9 +102,10 @@ public class SecurityConfig {
 	   }
 	  
 	   
+
 	   
+}   
 	
-}
 	
 
 

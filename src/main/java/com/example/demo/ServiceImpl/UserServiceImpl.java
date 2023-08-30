@@ -2,8 +2,10 @@ package com.example.demo.ServiceImpl;
 
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+import java.io.Console;
 import java.sql.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -14,9 +16,11 @@ import com.example.demo.Dto.HotelDto;
 import com.example.demo.Dto.UserDTO;
 import com.example.demo.Entity.BookingEntity;
 import com.example.demo.Entity.HotelEntity;
+import com.example.demo.Entity.Role;
 import com.example.demo.Entity.UserEntity;
 import com.example.demo.Repo.BookingRepo;
 import com.example.demo.Repo.HotelRepo;
+import com.example.demo.Repo.RoleRepo;
 import com.example.demo.Repo.UserRepo;
 import com.example.demo.Service.UserService;
 
@@ -38,27 +42,59 @@ public class UserServiceImpl implements UserService{
 	private BookingRepo bookingRepo;
 	
 
+	@Autowired
+	private RoleRepo roleRepo;
 	
 
 	@Override
 	public String addUser(UserDTO userDto) {
 		
 		
+		
 		UserEntity userEntity = new UserEntity(
-				userDto.getRoles(),
+				
 				userDto.getUserName(),
 				userDto.getUserEmail(),
 				userDto.getUserPassword()
-				
+			
 				);
 		
+//		userEntity.getRoles().add(role);
+		
+		
+		
+		
+		
+		
+//		Role role=roleRepo.findById(1).orElse(null);
+//		System.out.println(role);
+//	
+//		userEntity.getRoles().add(role);
+//		System.out.println(userEntity);
+		
+				Role role=roleRepo.findById(1).orElse(null);
+				
+				userEntity.getRoles().add(role);
+		
+		
 		userRepo.save(userEntity);
-		return "User Added :  "+ userEntity.getUserName() ;
+		
+		return "User Added :  "+ userEntity.getUserId() ;
 		
 		
 		
 		
 		
+	}
+
+
+
+
+
+	@Override
+	public String toString() {
+		return "UserServiceImpl [userRepo=" + userRepo + ", hotelRepo=" + hotelRepo + ", bookingRepo=" + bookingRepo
+				+ ", roleRepo=" + roleRepo + ", getAllUsers()=" + getAllUsers() + "]";
 	}
 
 

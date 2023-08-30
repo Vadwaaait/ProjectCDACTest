@@ -21,7 +21,7 @@ public class AdminController {
 	
 	
 	@PostMapping("/save")
-	public String saveAdmin(@RequestBody AdminDTO adminDto) {
+	public String saveAdmin(@RequestBody UserDTO adminDto) {
 		
 		try {
 			

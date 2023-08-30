@@ -3,6 +3,7 @@
 
 
 import java.sql.Date;
+import java.util.Collection;
 import java.util.Set;
 
 import com.example.demo.Entity.Role;
@@ -34,7 +35,7 @@ public class UserDTO {
 	private int noroomsbooked;
 	
 	
-	private Set<Role> roles;
+	private Collection<Role> roles;
 
 
 
@@ -45,7 +46,7 @@ public class UserDTO {
 
 
 
-	public Set<Role> getRoles() {
+	public Collection<Role> getRoles() {
 		return roles;
 	}
 
@@ -53,7 +54,7 @@ public class UserDTO {
 
 
 
-	public void setRoles(Set<Role> roles) {
+	public void setRoles(Collection<Role> roles) {
 		this.roles = roles;
 	}
 

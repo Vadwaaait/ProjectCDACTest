@@ -5,7 +5,7 @@ import com.example.demo.Dto.UserDTO;
 
 public interface AdminService {
 
-	String addAdmin(AdminDTO adminDto);
+	String addAdmin(UserDTO userDto);
 	
 	
 }
