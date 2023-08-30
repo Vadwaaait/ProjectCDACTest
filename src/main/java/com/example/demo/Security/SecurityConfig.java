@@ -47,6 +47,7 @@ public class SecurityConfig {
                            .requestMatchers("/api/user/getUsers").hasAnyAuthority("USER")
                            .requestMatchers("api/user/**").hasAnyAuthority("USER")
                            .requestMatchers("/payment").hasAnyAuthority("USER","ADMIN")
+                           .requestMatchers("api/admin/**").hasAnyAuthority("ADMIN")
                            .anyRequest()
                            .authenticated()
                            
@@ -85,7 +86,7 @@ public class SecurityConfig {
 	   @Bean
 	    public WebSecurityCustomizer webSecurityCustomizer() {
 		   
-	        return (web) -> web.ignoring().requestMatchers("/api/user/save","/api/admin/save");
+	        return (web) -> web.ignoring().requestMatchers("/api/user/save","/api/admin/save","/api/admin/AdminLogin");
 	    
 	   }
 	   
