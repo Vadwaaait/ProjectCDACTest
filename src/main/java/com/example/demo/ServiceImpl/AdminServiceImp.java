@@ -127,6 +127,18 @@ UserEntity userEntity = new UserEntity(
 				return null;
 	}
 
+
+
+	@Override
+	public String deleteHotelById(int hotid) {
+		
+		
+		
+		hotelRepo.deleteById(hotid);
+		
+		return "Hotel Deleted";
+	}
+
 	
 	
 	

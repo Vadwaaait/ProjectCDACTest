@@ -15,4 +15,6 @@ public interface AdminService {
 	
 	HotelEntity editHotelById(HotelDto hotelDto);
 	
+	
+	String deleteHotelById(int hotid);
 }
