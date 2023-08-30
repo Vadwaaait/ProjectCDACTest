@@ -3,8 +3,13 @@
 
 
 import java.sql.Date;
+import java.util.Collection;
+import java.util.Set;
+
+import com.example.demo.Entity.Role;
 
 import jakarta.persistence.OneToMany;
+
 
 public class UserDTO {
 	
@@ -30,7 +35,28 @@ public class UserDTO {
 	private int noroomsbooked;
 	
 	
-	
+	private Collection<Role> roles;
+
+
+
+
+
+
+
+
+
+
+	public Collection<Role> getRoles() {
+		return roles;
+	}
+
+
+
+
+
+	public void setRoles(Collection<Role> roles) {
+		this.roles = roles;
+	}
 
 
 

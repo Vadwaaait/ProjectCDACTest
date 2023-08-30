@@ -1,14 +1,18 @@
 package com.example.demo.Entity;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.hibernate.annotations.Cascade;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import com.example.demo.Entity.Role;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -41,30 +45,69 @@ public class UserEntity implements UserDetails{
 	@Column(name="userPass")
 	private String userPassword;
 	
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinTable(name="user_role", joinColumns = @JoinColumn(name="user",referencedColumnName = "userId"),
-	inverseJoinColumns = @JoinColumn(name="role",referencedColumnName = "id"))
-	private Set<Role> roles= new HashSet<>();
+	@ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	private Collection<Role> roles=new HashSet<Role>();
 	
 	
-	
-	
+	public UserEntity(String userName, String userEmail, String userPassword) {
+		super();
+		this.userName = userName;
+		this.userEmail = userEmail;
+		this.userPassword = userPassword;
+		
+	}
+
 
 	public UserEntity() {
 		
 	}
-
-	public UserEntity(String userName, String userEmail, String userPassword) {
 	
-		
-		this.userName = userName;
-		this.userEmail = userEmail;
-		this.userPassword = userPassword;
-	}
+	
+	
+	
+
+
+
+
+
+
+
+
+//	public UserEntity(String userName, String userEmail, String userPassword) {
+//	
+//		
+//		this.userName = userName;
+//		this.userEmail = userEmail;
+//		this.userPassword = userPassword;
+//	}
+
+	
+
+
+
+
+
+
+
+
+
+
+
 
 	public int getUserId() {
 		return userId;
 	}
+
+	public Collection<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Collection<Role> roles) {
+		this.roles = roles;
+	}
+
+
+
 
 	public void setUserId(int userId) {
 		this.userId = userId;
@@ -97,7 +140,7 @@ public class UserEntity implements UserDetails{
 	@Override
 	public String toString() {
 		return "UserEntity [userId=" + userId + ", userName=" + userName + ", userEmail=" + userEmail
-				+ ", userPassword=" + userPassword + "]";
+				+ ", userPassword=" + userPassword + ", roles=" + roles.toString() + "]";
 	}
 
 	@Override
