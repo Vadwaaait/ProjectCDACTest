@@ -27,7 +27,7 @@ public class BookingEntity {
 	@ManyToOne
 	private UserEntity userE;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	private HotelEntity hotelE;
 
 	

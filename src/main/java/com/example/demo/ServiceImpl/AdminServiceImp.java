@@ -10,10 +10,12 @@ import com.example.demo.Dto.AdminDTO;
 import com.example.demo.Dto.HotelDto;
 import com.example.demo.Dto.UserDTO;
 import com.example.demo.Entity.AdminEntity;
+import com.example.demo.Entity.BookingEntity;
 import com.example.demo.Entity.HotelEntity;
 import com.example.demo.Entity.Role;
 import com.example.demo.Entity.UserEntity;
 import com.example.demo.Repo.AdminRepo;
+import com.example.demo.Repo.BookingRepo;
 import com.example.demo.Repo.HotelRepo;
 import com.example.demo.Repo.RoleRepo;
 import com.example.demo.Repo.UserRepo;
@@ -31,6 +33,9 @@ public class AdminServiceImp implements AdminService{
 	
 	@Autowired
 	HotelRepo hotelRepo;
+	
+	@Autowired
+	BookingRepo bookrepo;
 	
 	@Override
 	public String addAdmin(UserDTO userDto) {
@@ -124,7 +129,16 @@ UserEntity userEntity = new UserEntity(
 	@Override
 	public String deleteHotelById(int hotid) {
 		
-		
+		 List<BookingEntity> lbe=bookrepo.findAll();
+		 
+		 for(BookingEntity be : lbe)
+		 {
+			 if(be.getHotelE().getHotelId()==hotid)
+			 {
+				 bookrepo.deleteById(be.getBookingId());
+			 }
+		 }
+		 
 		
 		hotelRepo.deleteById(hotid);
 		

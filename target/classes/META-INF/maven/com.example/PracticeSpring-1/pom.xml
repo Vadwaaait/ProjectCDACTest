@@ -31,6 +31,13 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-security</artifactId>
 	</dependency>
+	
+	<!--stripe payment dependency -->
+	<dependency>
+    <groupId>com.stripe</groupId>
+    <artifactId>stripe-java</artifactId>
+    <version>20.77.0</version>
+</dependency>
 
 		<dependency>
 			<groupId>com.mysql</groupId>
@@ -42,6 +49,10 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+
+
 	</dependencies>
 
 	<build>
