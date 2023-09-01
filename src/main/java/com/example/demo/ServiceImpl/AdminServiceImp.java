@@ -80,29 +80,21 @@ UserEntity userEntity = new UserEntity(
 		
 		List<UserEntity> lue= userRepo.findAll();
 		
-		for(UserEntity ue : lue)
+		UserEntity ll=userRepo.findByUserEmail(userDto.getUserEmail()).orElse(null);
+		
+		for(Role r : ll.getRoles())
 		{
-			
-			if(userDto.getUserEmail().equals(ue.getUserEmail()) && userDto.getUserPassword().equals(ue.getPassword()))
+			if(r.getName().equals("ADMIN"))
 			{
-				for(Role ur : ue.getRoles())
-				{
-					if(ur.getName().equals("ADMIN"))
-					{
-						return ue;
-					}
-					else
-						return null;
-					
-				}
-				
-				
+				return ll;
 			}
-			else
-				return null;
 		}
 		
+		
 		return null;
+		
+		
+		
 	}
 
 
