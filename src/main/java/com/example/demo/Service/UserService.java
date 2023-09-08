@@ -1,7 +1,11 @@
 package com.example.demo.Service;
 
+import java.sql.Date;
 import java.util.List;
 
+import org.springframework.web.bind.annotation.PathVariable;
+
+import com.example.demo.Dto.BookingDTO;
 import com.example.demo.Dto.HotelDto;
 import com.example.demo.Dto.UserDTO;
 import com.example.demo.Entity.BookingEntity;
@@ -30,5 +34,11 @@ public interface UserService {
 	List<BookingEntity> getMyBookings(int userId);
 	
 	List<HotelEntity> getHotelsByCity(String hotelCity);
+	
+	
+	public List<Date> bookingsOnDate( UserDTO userDto);
+	
+	int getBookingCountOfUser(UserDTO bdto);
+	
 	
 }

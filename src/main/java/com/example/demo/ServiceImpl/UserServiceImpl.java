@@ -7,11 +7,14 @@ import java.util.List;
 import java.util.Optional;
 import java.io.Console;
 import java.sql.Date;
+
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import com.example.demo.Dto.BookingDTO;
 import com.example.demo.Dto.HotelDto;
 import com.example.demo.Dto.UserDTO;
 import com.example.demo.Entity.BookingEntity;
@@ -273,7 +276,59 @@ public class UserServiceImpl implements UserService{
 
 
 
+	@Override
+	public List<Date> bookingsOnDate(UserDTO userDto) {
+		
+		int hotellId=userDto.getHotelid();
+		Date bookeddate=userDto.getFromDate();
+		
+		HotelEntity he=hotelRepo.findById(hotellId).orElse(null);
+	
+		List<BookingEntity> lbe=bookingRepo.findbooked(bookeddate, he);
+		List<Date> ld=new ArrayList<>();
+		
+		for(BookingEntity b : lbe)
+		{
+			ld.add(b.getFromDate());
+		}
+		
+		System.out.println(lbe);
+	
+		
+		return ld;
+	}
 
+
+
+
+
+	@Override
+	public int getBookingCountOfUser(UserDTO udto) {
+			
+//		int count=bookingRepo.getBookingCountOfUser(bdto.getUserE());
+		
+		
+		List<BookingEntity> lbe = bookingRepo.findAll();
+		
+		int count =0;
+		
+		for(BookingEntity be:lbe)
+		{
+			
+			if(be.getUserE().getUserId() == udto.getUserId())
+				count++;
+		}
+		
+		System.out.println("Count is : "+count);
+		
+		return count;
+	}
+
+
+
+
+
+	
 
 
 

@@ -1,7 +1,9 @@
 package com.example.demo.Controller;
 
+import java.sql.Date;
 import java.util.List;
 
+import org.apache.catalina.User;
 import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.Dto.BookingDTO;
 import com.example.demo.Dto.HotelDto;
 import com.example.demo.Dto.UserDTO;
 import com.example.demo.Entity.BookingEntity;
@@ -120,5 +123,41 @@ public class userController {
 		return userService.getHotelsByCity(hotelCity);
 	}
 	
+	
+	@PostMapping("/ondate")
+	public List<Date> bookingsOnDate(@RequestBody UserDTO udto)
+	{
+		
+		
+		return userService.bookingsOnDate(udto);
+	}
+	
+	@PostMapping("/bookDiscount")
+	public int getBookingCountOfUser(@RequestBody UserDTO bdto)
+	{
+		
+		
+		int count=userService.getBookingCountOfUser(bdto);
+		System.out.println(count);
+		int discount=0;
+		
+		if(count==0)
+			return 5;
+		
+		if(count%4==0)
+		{
+			discount=2;
+		}
+		else if(count%10==0)
+		{
+			discount=4;
+		}
+		else if(count%10==0 && count%4==0)
+		{
+			discount=4;
+		}
+		
+		return discount;
+	}
 
 }

@@ -145,6 +145,16 @@ UserEntity userEntity = new UserEntity(
 		return "Hotel Deleted";
 	}
 
+
+
+	@Override
+	public List<BookingEntity> allbookingdetails() {
+		
+		List<BookingEntity> lbe=bookrepo.findAll();
+		
+		return lbe;
+	}
+
 	
 	
 	
