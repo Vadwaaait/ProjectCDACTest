@@ -8,6 +8,9 @@ import org.apache.catalina.User;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -28,6 +31,7 @@ public class BookingEntity {
 	private UserEntity userE;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
+//	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	private HotelEntity hotelE;
 
 	

@@ -2,12 +2,16 @@ package com.example.demo.Entity;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -40,7 +44,11 @@ public class HotelEntity {
 	private int noOfRooms;
 	
 	@OneToMany(mappedBy = "hotelE")
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	private List<BookingEntity> bookingE;
+	
+		@OneToOne
+		private ImageEntity hotelImg;
 	
 	
 	
@@ -49,6 +57,36 @@ public class HotelEntity {
 	
 
 	
+
+
+	public ImageEntity getHotelImg() {
+			return hotelImg;
+		}
+
+
+		public void setHotelImg(ImageEntity hotelImg) {
+			this.hotelImg = hotelImg;
+		}
+
+
+	public List<BookingEntity> getBookingE() {
+		return bookingE;
+	}
+
+
+	public void setBookingE(List<BookingEntity> bookingE) {
+		this.bookingE = bookingE;
+	}
+
+
+//	public ImageEntity getHotelImg() {
+//		return hotelImg;
+//	}
+//
+//
+//	public void setHotelImg(ImageEntity hotelImg) {
+//		this.hotelImg = hotelImg;
+//	}
 
 
 	public HotelEntity(String hotelName, String hotelCity, String hotelAddress, double hotelPrice,
